@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ozrahat.spellingbeeturkish.controller.HomeController">
+   <VBox alignment="BASELINE_CENTER" layoutX="179.0" layoutY="66.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ImageView fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
+         <VBox.margin>
+            <Insets bottom="16.0" left="16.0" right="16.0" top="32.0" />
+         </VBox.margin>
+         <Image url="@bee.png" />
+      </ImageView>
+      <Label styleClass="home-title" text="Spelling Bee Turkish" />
+      <Label styleClass="home-desc" text="Oyunu nasıl oynamak istersiniz ?">
+         <VBox.margin>
+            <Insets top="32.0" />
+         </VBox.margin>
+      </Label>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="16.0">
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <Button fx:id="autoGenerateButton" mnemonicParsing="false" onAction="#autoGenerateButtonClicked" styleClass="default-btn" text="Otomatik Oluştur" />
+         <Button fx:id="manualGenerateButton" mnemonicParsing="false" onAction="#manualGenerateButtonClicked" styleClass="default-btn" text="Harf Gir" />
+      </HBox>
+   </VBox>
+</AnchorPane>

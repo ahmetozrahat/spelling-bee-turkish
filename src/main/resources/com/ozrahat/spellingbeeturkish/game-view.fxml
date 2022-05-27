@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="578.0" prefWidth="870.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ozrahat.spellingbeeturkish.controller.GameController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+        <ProgressBar fx:id="scoreProgressBar" prefWidth="200.0" progress="0.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="40.0" />
+        <Label fx:id="scoreLabel" styleClass="score-label" text="Skorunuz: 16" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="16.0" />
+        <ListView fx:id="wordsListView" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="90.0" />
+        <Label fx:id="wordsLabel" layoutX="22.0" layoutY="66.0" styleClass="score-label" text="Toplamda 0 kelime buldunuz" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="64.0" />
+    </AnchorPane>
+    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+        <TextField fx:id="textField" alignment="CENTER" onAction="#textFieldEntered" promptText="Yazın ya da tıklayın" styleClass="text-field">
+            <VBox.margin>
+                <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
+            </VBox.margin>
+            <font>
+                <Font size="18.0" />
+            </font>
+        </TextField>
+        <HBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0" spacing="16.0">
+            <GridPane prefWidth="240.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+                <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="100.0">
+                    <Button fx:id="letterButton6" minHeight="75.0" minWidth="75.0" mnemonicParsing="false" onAction="#letterButton6Clicked" styleClass="letter-btn" text="G" />
+                    <Button fx:id="letterButton5" minHeight="75.0" minWidth="75.0" mnemonicParsing="false" onAction="#letterButton5Clicked" styleClass="letter-btn" text="E" />
+                </VBox>
+                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                    <Button fx:id="letterButton1" minHeight="75.0" minWidth="75.0" mnemonicParsing="false" onAction="#letterButton1Clicked" styleClass="letter-btn" text="A" />
+                    <Button fx:id="centerLetterButton" minHeight="75.0" minWidth="75.0" mnemonicParsing="false" onAction="#centerLetterButtonClicked" styleClass="letter-btn-center" text="N" />
+                    <Button fx:id="letterButton4" minHeight="75.0" minWidth="75.0" mnemonicParsing="false" onAction="#letterButton4Clicked" styleClass="letter-btn" text="H" />
+                </VBox>
+                <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
+                    <Button fx:id="letterButton2" minHeight="75.0" minWidth="75.0" mnemonicParsing="false" onAction="#letterButton2Clicked" styleClass="letter-btn" text="D" />
+                    <Button fx:id="letterButton3" minHeight="75.0" minWidth="75.0" mnemonicParsing="false" onAction="#letterButton3Clicked" styleClass="letter-btn" text="C" />
+                </VBox>
+            </GridPane>
+        </HBox>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="16.0">
+            <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteButtonClicked" styleClass="default-btn" text="Sil">
+                <font>
+                    <Font size="14.0" />
+                </font>
+            </Button>
+            <Button fx:id="shuffleButton" minWidth="50.0" mnemonicParsing="false" onAction="#shuffleButtonClicked" styleClass="shuffle-btn">
+                <font>
+                    <Font size="14.0" />
+                </font>
+            </Button>
+            <Button fx:id="enterButton" mnemonicParsing="false" onAction="#enterButtonClicked" styleClass="default-btn" text="Gir">
+                <font>
+                    <Font size="14.0" />
+                </font>
+            </Button>
+        </HBox>
+    </VBox>
+</GridPane>
