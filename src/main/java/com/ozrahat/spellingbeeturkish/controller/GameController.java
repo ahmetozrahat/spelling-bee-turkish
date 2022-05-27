@@ -110,7 +110,7 @@ public class GameController {
 
     @FXML
     private void shuffleButtonClicked() {
-        System.out.println("shuffle");
+        gameModel.shuffleLetters();
     }
 
     @FXML
@@ -120,6 +120,14 @@ public class GameController {
 
     public void setModel(GameModel gameModel) {
         this.gameModel = gameModel;
-        gameModel.addListener(m -> scoreLabel.setText("Puanınız: " + m.getScore()));
+        gameModel.addListener(m -> {
+            scoreLabel.setText("Puanınız: " + m.getScore());
+            letterButton1.setText(gameModel.getLetters().get(0));
+            letterButton2.setText(gameModel.getLetters().get(1));
+            letterButton3.setText(gameModel.getLetters().get(2));
+            letterButton4.setText(gameModel.getLetters().get(3));
+            letterButton5.setText(gameModel.getLetters().get(4));
+            letterButton6.setText(gameModel.getLetters().get(5));
+        });
     }
 }
