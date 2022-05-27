@@ -15,9 +15,9 @@
     </rowConstraints>
     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
         <ProgressBar fx:id="scoreProgressBar" prefWidth="200.0" progress="0.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="40.0" />
-        <Label fx:id="scoreLabel" styleClass="score-label" text="Skorunuz: 16" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="16.0" />
-        <ListView fx:id="wordsListView" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="90.0" />
-        <Label fx:id="wordsLabel" layoutX="22.0" layoutY="66.0" styleClass="score-label" text="Toplamda 0 kelime buldunuz" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="64.0" />
+        <Label fx:id="scoreLabel" styleClass="score-label" text="Puanınız: 0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="16.0" />
+        <ListView fx:id="wordsListView" prefHeight="200.0" prefWidth="200.0" styleClass="word-listview" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="90.0" />
+        <Label fx:id="wordsLabel" layoutX="22.0" layoutY="66.0" styleClass="score-label" text="Toplamda 0 kelime buldunuz." AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="64.0" />
     </AnchorPane>
     <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
         <TextField fx:id="textField" alignment="CENTER" onAction="#textFieldEntered" promptText="Yazın ya da tıklayın" styleClass="text-field">
