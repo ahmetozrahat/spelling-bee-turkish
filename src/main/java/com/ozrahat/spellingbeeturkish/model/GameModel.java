@@ -13,16 +13,20 @@ public class GameModel {
     private ArrayList<String> letters;
     private String centerLetter;
 
+    private ArrayList<String> correctAnswers;
+
     private int score;
 
     public GameModel() {
         letters = new ArrayList<>();
+        correctAnswers = new ArrayList<>();
         letters.add("A");
         letters.add("D");
         letters.add("C");
         letters.add("H");
         letters.add("E");
         letters.add("G");
+        centerLetter = "N";
     }
 
     public void addListener(Listener listener) {
@@ -54,12 +58,21 @@ public class GameModel {
         this.centerLetter = centerLetter;
     }
 
+    public ArrayList<String> getCorrectAnswers() {
+        return correctAnswers;
+    }
+
     private void notifyObservers() {
         listeners.forEach(listener -> listener.onChange(this));
     }
 
     public void shuffleLetters() {
         Collections.shuffle(letters);
+        notifyObservers();
+    }
+
+    public void addCorrectAnswer(String word) {
+        correctAnswers.add(word);
         notifyObservers();
     }
 }
