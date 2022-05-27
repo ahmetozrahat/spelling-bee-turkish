@@ -1,13 +1,11 @@
 package com.ozrahat.spellingbeeturkish.model;
 
+import com.ozrahat.spellingbeeturkish.helpers.Listener;
+
 import java.util.LinkedList;
 import java.util.List;
 
 public class GameModel {
-    public interface Listener {
-        void onChange(GameModel gameModel);
-    }
-
     private List<Listener> listeners = new LinkedList<>();
 
     private int score;
