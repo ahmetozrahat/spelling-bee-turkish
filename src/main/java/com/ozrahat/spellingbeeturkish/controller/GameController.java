@@ -130,7 +130,7 @@ public class GameController {
             if (isWordValid(word)) {
                 textField.clear();
                 gameModel.addCorrectAnswer(word);
-                gameModel.setScore(gameModel.getScore() + (word.length() - 3));
+                gameModel.setScore(gameModel.getScore() + getPoints(word));
             }
         }
     }
@@ -173,5 +173,17 @@ public class GameController {
         if (gameModel.getCorrectAnswers().contains(word))
             return false;
         return dictionary.wordExists(word);
+    }
+
+    /**
+     * Method for calculating the correct answer points.
+     *
+     * @param word The found word.
+     * @return point value.
+     */
+    public int getPoints(String word) {
+        if (Helpers.isPangram(word, gameModel))
+            return 7;
+        return word.length() - 3;
     }
 }
