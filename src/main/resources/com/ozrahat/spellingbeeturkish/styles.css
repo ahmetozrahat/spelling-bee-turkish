@@ -73,3 +73,16 @@
     -fx-font-size: 18;
     -fx-text-fill: gray;
 }
+
+.word-listview {
+    -fx-background-color: #F4F4F4;
+}
+
+.progress-bar > .track {
+    -fx-text-box-border: lightgray;
+    -fx-control-inner-background: #F4F4F4;
+}
+
+.progress-bar .bar {
+    -fx-background-color: #F7DA21;
+}

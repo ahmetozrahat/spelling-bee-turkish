@@ -1,13 +1,16 @@
 package com.ozrahat.spellingbeeturkish.controller;
 
+import com.ozrahat.spellingbeeturkish.Main;
+import com.ozrahat.spellingbeeturkish.helpers.Dictionary;
 import com.ozrahat.spellingbeeturkish.helpers.Helpers;
 import com.ozrahat.spellingbeeturkish.model.GameModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.text.Font;
+
+import java.io.File;
 
 public class GameController {
-
-    GameModel gameModel;
 
     @FXML
     private TextField textField;
@@ -54,7 +57,13 @@ public class GameController {
     @FXML
     private ListView<Label> wordsListView;
 
+    private GameModel gameModel;
+    private Dictionary dictionary;
+
     public GameController() {
+        File dictionaryFile = new File("C:\\Users\\ahmet\\IdeaProjects\\SpellingBeeTurkish\\src\\main\\java\\com\\ozrahat\\spellingbeeturkish\\assets\\dictionary.txt");
+        dictionary = new Dictionary(dictionaryFile);
+        dictionary.printWords();
     }
 
     @FXML
@@ -110,16 +119,71 @@ public class GameController {
 
     @FXML
     private void shuffleButtonClicked() {
-        System.out.println("shuffle");
+        gameModel.shuffleLetters();
     }
 
     @FXML
     private void enterButtonClicked() {
-        System.out.println("enter");
+        // Check for whether TextField is empty or not.
+        if (!textField.getText().trim().isEmpty() && !textField.getText().trim().isBlank()) {
+            String word = textField.getText().trim().toLowerCase();
+            if (isWordValid(word)) {
+                textField.clear();
+                gameModel.addCorrectAnswer(word);
+                gameModel.setScore(gameModel.getScore() + getPoints(word));
+            }
+        }
     }
 
     public void setModel(GameModel gameModel) {
         this.gameModel = gameModel;
-        gameModel.addListener(m -> scoreLabel.setText("Puanınız: " + m.getScore()));
+        gameModel.addListener(m -> {
+            scoreLabel.setText("Puanınız: " + m.getScore());
+            scoreProgressBar.setProgress(gameModel.getScore() / 100.0);
+            wordsLabel.setText("Toplamda " + m.getCorrectAnswers().size() + " kelime buldunuz.");
+
+            letterButton1.setText(gameModel.getLetters().get(0));
+            letterButton2.setText(gameModel.getLetters().get(1));
+            letterButton3.setText(gameModel.getLetters().get(2));
+            letterButton4.setText(gameModel.getLetters().get(3));
+            letterButton5.setText(gameModel.getLetters().get(4));
+            letterButton6.setText(gameModel.getLetters().get(5));
+
+            wordsListView.getItems().clear();
+            gameModel.getCorrectAnswers().forEach(word -> {
+                Label label = new Label(word);
+                label.setFont(Font.loadFont(Main.class.getResourceAsStream("fonts/Poppins-Medium.ttf"),14));
+                wordsListView.getItems().add(label);
+            });
+        });
+    }
+
+    /**
+     * Method for checking whether the given word is valid and
+     * exists in the dictionary or not.
+     *
+     * @param word Ayn given word.
+     * @return true or false
+     */
+    public boolean isWordValid(String word) {
+        if (word.length() < 4)
+            return false;
+        if (!word.contains(gameModel.getCenterLetter().toLowerCase()))
+            return false;
+        if (gameModel.getCorrectAnswers().contains(word))
+            return false;
+        return dictionary.wordExists(word);
+    }
+
+    /**
+     * Method for calculating the correct answer points.
+     *
+     * @param word The found word.
+     * @return point value.
+     */
+    public int getPoints(String word) {
+        if (Helpers.isPangram(word, gameModel))
+            return 7;
+        return word.length() - 3;
     }
 }
