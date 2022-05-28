@@ -4,3 +4,6 @@ hand
 hang
 hanged
 hence
+dance
+canned
+cancel

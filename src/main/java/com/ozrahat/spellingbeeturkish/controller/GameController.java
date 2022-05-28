@@ -172,6 +172,12 @@ public class GameController {
             return false;
         if (gameModel.getCorrectAnswers().contains(word))
             return false;
+        for (Character letter: word.toCharArray()) {
+            String letterString = String.valueOf(letter).toUpperCase();
+            if (!gameModel.getLetters().contains(letterString) && !gameModel.getCenterLetter().equals(letterString)) {
+                return false;
+            }
+        }
         return dictionary.wordExists(word);
     }
 
