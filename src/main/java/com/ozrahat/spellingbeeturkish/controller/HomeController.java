@@ -34,17 +34,7 @@ public class HomeController {
             GameController gameController = fxmlLoader.getController();
             gameController.setModel(gameModel);
 
-            Scene scene = new Scene(root, 960, 540);
-            Stage stage = new Stage();
-
-            Image image = new Image(Main.class.getResourceAsStream("bee.png"));
-            stage.getIcons().add(image);
-
-            stage.setTitle("Spelling Bee Turkish");
-            stage.setScene(scene);
-            stage.show();
-
-            autoGenerateButton.getScene().getWindow().hide();
+            pushView(root, autoGenerateButton);
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Failed to open game window.");
@@ -57,20 +47,24 @@ public class HomeController {
         try {
             Parent root = fxmlLoader.load();
 
-            Scene scene = new Scene(root, 960, 540);
-            Stage stage = new Stage();
-
-            Image image = new Image(Main.class.getResourceAsStream("bee.png"));
-            stage.getIcons().add(image);
-
-            stage.setTitle("Spelling Bee Turkish");
-            stage.setScene(scene);
-            stage.show();
-
-            manualGenerateButton.getScene().getWindow().hide();
+            pushView(root, manualGenerateButton);
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Failed to open game window.");
         }
+    }
+
+    private void pushView(Parent root, Button manualGenerateButton) {
+        Scene scene = new Scene(root, 960, 540);
+        Stage stage = new Stage();
+
+        Image image = new Image(Main.class.getResourceAsStream("bee.png"));
+        stage.getIcons().add(image);
+
+        stage.setTitle("Spelling Bee Turkish");
+        stage.setScene(scene);
+        stage.show();
+
+        manualGenerateButton.getScene().getWindow().hide();
     }
 }
