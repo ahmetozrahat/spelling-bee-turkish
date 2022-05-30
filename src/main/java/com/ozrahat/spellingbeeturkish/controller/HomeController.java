@@ -18,9 +18,14 @@ public class HomeController {
     @FXML
     private Button manualGenerateButton;
 
+    private FXMLLoader fxmlLoader;
+
+    public HomeController() {
+        fxmlLoader = new FXMLLoader();
+    }
+
     @FXML
     private void autoGenerateButtonClicked() {
-        FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(Main.class.getResource("game-view.fxml"));
         try {
             Parent root = fxmlLoader.load();
@@ -48,6 +53,24 @@ public class HomeController {
 
     @FXML
     private void manualGenerateButtonClicked() {
+        fxmlLoader.setLocation(Main.class.getResource("create-word-view.fxml"));
+        try {
+            Parent root = fxmlLoader.load();
 
+            Scene scene = new Scene(root, 960, 540);
+            Stage stage = new Stage();
+
+            Image image = new Image(Main.class.getResourceAsStream("bee.png"));
+            stage.getIcons().add(image);
+
+            stage.setTitle("Spelling Bee Turkish");
+            stage.setScene(scene);
+            stage.show();
+
+            manualGenerateButton.getScene().getWindow().hide();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Failed to open game window.");
+        }
     }
 }
