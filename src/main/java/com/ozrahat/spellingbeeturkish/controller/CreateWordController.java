@@ -1,10 +1,17 @@
 package com.ozrahat.spellingbeeturkish.controller;
 
+import com.ozrahat.spellingbeeturkish.Main;
+import com.ozrahat.spellingbeeturkish.helpers.Dictionary;
+import com.ozrahat.spellingbeeturkish.helpers.Helpers;
+import com.ozrahat.spellingbeeturkish.model.GameModel;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,8 +29,32 @@ public class CreateWordController {
     @FXML
     private Button createGameButton;
 
+    private static Dictionary dictionary;
+
+    private static ArrayList<String> pangramWords;
+    private static ArrayList<Character> characters;
+
+    private static ArrayList<String> validWords;
+    private static ArrayList<String> wordList;
+
+    private FXMLLoader fxmlLoader;
+
     public CreateWordController() {
+        fxmlLoader = new FXMLLoader();
+        characters = new ArrayList<>();
+        pangramWords = new ArrayList<>();
+        validWords = new ArrayList<>();
+
+        initializeDictionary();
         initializeAlphabet();
+    }
+
+    /**
+     * Method for initializing the Dictionary object with absolute path of the dictionary file.
+     */
+    private static void initializeDictionary() {
+        File file = new File("C:\\Users\\ahmet\\IdeaProjects\\KelimeBulucu\\src\\com\\ozrahat\\kelimebulucu\\dictionary.txt");
+        dictionary = new Dictionary(file);
     }
 
     /**
@@ -47,7 +78,31 @@ public class CreateWordController {
         if (!charactersTextField.getText().isEmpty() && !charactersTextField.getText().isBlank()) {
             String query = charactersTextField.getText().trim().toLowerCase();
             if (isValidQuery(query)) {
-                System.out.println("Valid query string.");
+                // Start the game.
+                GameModel gameModel = new GameModel();
+                for (Character character: query.toCharArray())
+                    characters.add(character);
+
+                boolean canCreateWordList = tryToFindWordList();
+
+                if (canCreateWordList) {
+                    for (String word: dictionary.getWordList()) {
+                        if (Helpers.isValidWord(word, characters)) {
+                            validWords.add(word);
+                        }
+                    }
+                    Character centerCharacter =  Helpers.getWordCountByCenterCharacter(characters, validWords);
+                    characters.remove(centerCharacter);
+                    gameModel.setCharacters(characters);
+                    gameModel.setCenterLetter(centerCharacter);
+
+                    // Let's create our word list for the game!
+                    wordList = Helpers.getWordListForGame(validWords, centerCharacter);
+                    gameModel.setWordList(wordList);
+                    startGame(gameModel);
+                }else {
+                    System.out.println("Can't create a word list with the given letters.");
+                }
             }else {
                 System.out.println("Not a valid query string.");
             }
@@ -87,5 +142,31 @@ public class CreateWordController {
                 return false;
         }
         return true;
+    }
+
+    private static boolean tryToFindWordList() {
+        pangramWords.clear();
+        for (String word: dictionary.getWordList()) {
+            if (Helpers.isPangram(word, characters)) {
+                pangramWords.add(word);
+                System.out.println(word + " is a pangram!");
+            }
+        }
+        return !pangramWords.isEmpty();
+    }
+
+    private void startGame(GameModel gameModel) {
+        fxmlLoader.setLocation(Main.class.getResource("game-view.fxml"));
+        try {
+            Parent root = fxmlLoader.load();
+
+            GameController gameController = fxmlLoader.getController();
+            gameController.setModel(gameModel);
+
+            Helpers.pushView(root, createGameButton);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Failed to open game window.");
+        }
     }
 }
