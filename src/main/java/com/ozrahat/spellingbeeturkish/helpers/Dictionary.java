@@ -19,6 +19,10 @@ public class Dictionary {
         readFile(dictionaryFile);
     }
 
+    public ArrayList<String> getWordList() {
+        return wordList;
+    }
+
     /**
      * Method for reading the words into the array list.
      *
