@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.text.Font;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class GameController {
 
@@ -137,25 +138,7 @@ public class GameController {
 
     public void setModel(GameModel gameModel) {
         this.gameModel = gameModel;
-        gameModel.addListener(m -> {
-            scoreLabel.setText("Puanınız: " + m.getScore());
-            scoreProgressBar.setProgress(gameModel.getScore() / 100.0);
-            wordsLabel.setText("Toplamda " + m.getCorrectAnswers().size() + " kelime buldunuz.");
-
-            letterButton1.setText(gameModel.getLetters().get(0));
-            letterButton2.setText(gameModel.getLetters().get(1));
-            letterButton3.setText(gameModel.getLetters().get(2));
-            letterButton4.setText(gameModel.getLetters().get(3));
-            letterButton5.setText(gameModel.getLetters().get(4));
-            letterButton6.setText(gameModel.getLetters().get(5));
-
-            wordsListView.getItems().clear();
-            gameModel.getCorrectAnswers().forEach(word -> {
-                Label label = new Label(word);
-                label.setFont(Font.loadFont(Main.class.getResourceAsStream("fonts/Poppins-Medium.ttf"),14));
-                wordsListView.getItems().add(label);
-            });
-        });
+        gameModel.addListener(this::updateUI);
     }
 
     /**
@@ -168,13 +151,13 @@ public class GameController {
     public boolean isWordValid(String word) {
         if (word.length() < 4)
             return false;
-        if (!word.contains(gameModel.getCenterLetter().toLowerCase()))
+        if (!word.contains(String.valueOf(gameModel.getCenterLetter())))
             return false;
         if (gameModel.getCorrectAnswers().contains(word))
             return false;
-        for (Character letter: word.toCharArray()) {
-            String letterString = String.valueOf(letter).toUpperCase();
-            if (!gameModel.getLetters().contains(letterString) && !gameModel.getCenterLetter().equals(letterString)) {
+        for (Character character: word.toCharArray()) {
+            String characterString = String.valueOf(character);
+            if (!gameModel.getCharacters().contains(characterString.charAt(0)) && !gameModel.getCenterLetter().equals(character)) {
                 return false;
             }
         }
@@ -188,8 +171,31 @@ public class GameController {
      * @return point value.
      */
     public int getPoints(String word) {
-        if (Helpers.isPangram(word, gameModel))
+        ArrayList<Character> characters = new ArrayList<>(gameModel.getCharacters());
+        characters.add(gameModel.getCenterLetter());
+        if (Helpers.isPangram(word, characters))
             return 7;
         return word.length() - 3;
+    }
+
+    private void updateUI(GameModel m) {
+        scoreLabel.setText("Puanınız: " + m.getScore());
+        scoreProgressBar.setProgress(gameModel.getScore() / 100.0);
+        wordsLabel.setText("Toplamda " + m.getCorrectAnswers().size() + " kelime buldunuz.");
+
+        letterButton1.setText(gameModel.getCharacters().get(0).toString().toUpperCase());
+        letterButton2.setText(gameModel.getCharacters().get(1).toString().toUpperCase());
+        letterButton3.setText(gameModel.getCharacters().get(2).toString().toUpperCase());
+        letterButton4.setText(gameModel.getCharacters().get(3).toString().toUpperCase());
+        letterButton5.setText(gameModel.getCharacters().get(4).toString().toUpperCase());
+        letterButton6.setText(gameModel.getCharacters().get(5).toString().toUpperCase());
+        centerLetterButton.setText(gameModel.getCenterLetter().toString().toUpperCase());
+
+        wordsListView.getItems().clear();
+        gameModel.getCorrectAnswers().forEach(word -> {
+            Label label = new Label(word);
+            label.setFont(Font.loadFont(Main.class.getResourceAsStream("fonts/Poppins-Medium.ttf"),14));
+            wordsListView.getItems().add(label);
+        });
     }
 }
