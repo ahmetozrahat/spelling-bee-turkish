@@ -67,7 +67,6 @@ public class GameController implements Initializable {
     public GameController() {
         File dictionaryFile = new File("C:\\Users\\ahmet\\IdeaProjects\\SpellingBeeTurkish\\src\\main\\java\\com\\ozrahat\\spellingbeeturkish\\assets\\dictionary.txt");
         dictionary = new Dictionary(dictionaryFile);
-        dictionary.printWords();
     }
 
     @Override
@@ -152,6 +151,7 @@ public class GameController implements Initializable {
 
     public void setModel(GameModel gameModel) {
         this.gameModel = gameModel;
+        updateUI(gameModel);
         gameModel.addListener(this::updateUI);
     }
 
