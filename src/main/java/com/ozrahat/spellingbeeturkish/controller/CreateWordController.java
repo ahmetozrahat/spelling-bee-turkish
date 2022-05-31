@@ -41,11 +41,9 @@ public class CreateWordController {
                 GameModel gameModel = spellingBeeGameBuilder.buildGame(query);
                 startGame(gameModel);
             } catch (NotValidQueryStringException e) {
-                e.printStackTrace();
                 infoLabel.setText("Lütfen girdiğiniz harfleri kontrol ediniz.");
                 charactersTextField.clear();
             } catch (NoSuchWordListException e) {
-                e.printStackTrace();
                 infoLabel.setText("Bu dizi ile bir oyun oluşturulamadı. Lütfen farklı harfler ile tekrar deneyiniz.");
                 charactersTextField.clear();
             }
