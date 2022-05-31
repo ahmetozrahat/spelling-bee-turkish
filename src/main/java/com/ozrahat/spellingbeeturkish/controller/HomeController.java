@@ -1,14 +1,13 @@
 package com.ozrahat.spellingbeeturkish.controller;
 
 import com.ozrahat.spellingbeeturkish.Main;
+import com.ozrahat.spellingbeeturkish.helpers.Helpers;
+import com.ozrahat.spellingbeeturkish.SpellingBeeGameBuilder;
 import com.ozrahat.spellingbeeturkish.model.GameModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.stage.Stage;
 
 public class HomeController {
 
@@ -18,28 +17,25 @@ public class HomeController {
     @FXML
     private Button manualGenerateButton;
 
+    private final FXMLLoader fxmlLoader;
+
+    public HomeController() {
+        fxmlLoader = new FXMLLoader();
+    }
+
     @FXML
     private void autoGenerateButtonClicked() {
-        FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(Main.class.getResource("game-view.fxml"));
         try {
             Parent root = fxmlLoader.load();
 
-            GameModel gameModel = new GameModel();
+            SpellingBeeGameBuilder spellingBeeGameBuilder = new SpellingBeeGameBuilder();
+            GameModel gameModel = spellingBeeGameBuilder.buildGame();
+
             GameController gameController = fxmlLoader.getController();
             gameController.setModel(gameModel);
 
-            Scene scene = new Scene(root, 960, 540);
-            Stage stage = new Stage();
-
-            Image image = new Image(Main.class.getResourceAsStream("bee.png"));
-            stage.getIcons().add(image);
-
-            stage.setTitle("Spelling Bee Turkish");
-            stage.setScene(scene);
-            stage.show();
-
-            autoGenerateButton.getScene().getWindow().hide();
+            Helpers.pushView(root, autoGenerateButton);
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Failed to open game window.");
@@ -48,6 +44,14 @@ public class HomeController {
 
     @FXML
     private void manualGenerateButtonClicked() {
+        fxmlLoader.setLocation(Main.class.getResource("create-word-view.fxml"));
+        try {
+            Parent root = fxmlLoader.load();
 
+            Helpers.pushView(root, manualGenerateButton);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Failed to open game window.");
+        }
     }
 }

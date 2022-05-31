@@ -2,31 +2,22 @@ package com.ozrahat.spellingbeeturkish.model;
 
 import com.ozrahat.spellingbeeturkish.helpers.Listener;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class GameModel {
     private List<Listener> listeners = new LinkedList<>();
 
-    private ArrayList<String> letters;
-    private String centerLetter;
+    private ArrayList<Character> characters;
+    private Character centerCharacter;
 
-    private ArrayList<String> correctAnswers;
+    private TreeSet<String> wordList;
+    private TreeSet<String> correctAnswers;
 
     private int score;
 
     public GameModel() {
-        letters = new ArrayList<>();
-        correctAnswers = new ArrayList<>();
-        letters.add("A");
-        letters.add("D");
-        letters.add("C");
-        letters.add("H");
-        letters.add("E");
-        letters.add("G");
-        centerLetter = "N";
+        characters = new ArrayList<>();
+        correctAnswers = new TreeSet<>();
     }
 
     public void addListener(Listener listener) {
@@ -42,23 +33,31 @@ public class GameModel {
         notifyObservers();
     }
 
-    public ArrayList<String> getLetters() {
-        return letters;
+    public ArrayList<Character> getCharacters() {
+        return characters;
     }
 
-    public void setLetters(ArrayList<String> letters) {
-        this.letters = letters;
+    public void setCharacters(ArrayList<Character> characters) {
+        this.characters = characters;
     }
 
-    public String getCenterLetter() {
-        return centerLetter;
+    public Character getCenterLetter() {
+        return centerCharacter;
     }
 
-    public void setCenterLetter(String centerLetter) {
-        this.centerLetter = centerLetter;
+    public void setCenterLetter(Character centerLetter) {
+        this.centerCharacter = centerLetter;
     }
 
-    public ArrayList<String> getCorrectAnswers() {
+    public TreeSet<String> getWordList() {
+        return wordList;
+    }
+
+    public void setWordList(TreeSet<String> wordList) {
+        this.wordList = wordList;
+    }
+
+    public TreeSet<String> getCorrectAnswers() {
         return correctAnswers;
     }
 
@@ -67,7 +66,7 @@ public class GameModel {
     }
 
     public void shuffleLetters() {
-        Collections.shuffle(letters);
+        Collections.shuffle(characters);
         notifyObservers();
     }
 
