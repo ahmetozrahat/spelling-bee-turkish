@@ -2,10 +2,7 @@ package com.ozrahat.spellingbeeturkish.model;
 
 import com.ozrahat.spellingbeeturkish.helpers.Listener;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class GameModel {
     private List<Listener> listeners = new LinkedList<>();
@@ -14,13 +11,13 @@ public class GameModel {
     private Character centerCharacter;
 
     private ArrayList<String> wordList;
-    private ArrayList<String> correctAnswers;
+    private TreeSet<String> correctAnswers;
 
     private int score;
 
     public GameModel() {
         characters = new ArrayList<>();
-        correctAnswers = new ArrayList<>();
+        correctAnswers = new TreeSet<>();
     }
 
     public void addListener(Listener listener) {
@@ -60,7 +57,7 @@ public class GameModel {
         this.wordList = wordList;
     }
 
-    public ArrayList<String> getCorrectAnswers() {
+    public TreeSet<String> getCorrectAnswers() {
         return correctAnswers;
     }
 
