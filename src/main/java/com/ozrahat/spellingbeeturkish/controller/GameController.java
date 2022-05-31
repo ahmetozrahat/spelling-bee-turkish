@@ -196,7 +196,7 @@ public class GameController implements Initializable {
 
     private void updateUI(GameModel m) {
         scoreLabel.setText("Puanınız: " + m.getScore());
-        scoreProgressBar.setProgress(gameModel.getScore() / 100.0);
+        scoreProgressBar.setProgress(m.getCorrectAnswers().size() / 80.0);
         wordsLabel.setText("Toplamda " + m.getCorrectAnswers().size() + " kelime buldunuz.");
 
         letterButton1.setText(gameModel.getCharacters().get(0).toString().toUpperCase());
