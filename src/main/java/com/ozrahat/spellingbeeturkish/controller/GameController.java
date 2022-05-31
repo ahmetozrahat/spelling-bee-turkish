@@ -63,7 +63,7 @@ public class GameController implements Initializable {
     private ListView<Label> wordsListView;
 
     private GameModel gameModel;
-    private Dictionary dictionary;
+    private final Dictionary dictionary;
 
     public GameController() {
         File dictionaryFile = new File("C:\\Users\\ahmet\\IdeaProjects\\SpellingBeeTurkish\\src\\main\\java\\com\\ozrahat\\spellingbeeturkish\\assets\\dictionary.txt");
@@ -82,7 +82,7 @@ public class GameController implements Initializable {
     @FXML
     private void textFieldEntered() {
         if (!textField.getText().isEmpty() && !textField.getText().isBlank())
-            System.out.println(textField.getText().trim());
+            enterButtonClicked();
     }
 
     @FXML
