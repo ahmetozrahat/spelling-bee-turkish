@@ -13,7 +13,11 @@
          </VBox.margin>
          <Image url="@bee.png" />
       </ImageView>
-      <Label fx:id="infoLabel" maxWidth="400.0" styleClass="home-desc" text="Lütfen oyun oluşturmak için, 7 harfli, harfleri birbirinden farklı, anlamlı ya da anlamsız bir kelime girin." textAlignment="CENTER" wrapText="true" />
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label fx:id="infoLabel" styleClass="home-desc" text="Lütfen oyun oluşturmak için, 7 harfli, harfleri birbirinden farklı, anlamlı ya da anlamsız bir kelime girin." textAlignment="CENTER" wrapText="true" />
+         </children>
+      </HBox>
       <TextField fx:id="charactersTextField" alignment="CENTER" promptText="HARFLERİ GİRİN" styleClass="text-field" />
       <Button fx:id="createGameButton" mnemonicParsing="false" onAction="#createGameButtonClicked" styleClass="default-btn" text="Oyun Oluştur">
          <VBox.margin>
