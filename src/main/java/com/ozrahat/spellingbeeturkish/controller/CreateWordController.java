@@ -8,12 +8,17 @@ import com.ozrahat.spellingbeeturkish.helpers.SpellingBeeGameBuilder;
 import com.ozrahat.spellingbeeturkish.model.GameModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 
-public class CreateWordController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class CreateWordController implements Initializable {
 
     @FXML
     private Label infoLabel;
@@ -30,6 +35,15 @@ public class CreateWordController {
         fxmlLoader = new FXMLLoader();
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        charactersTextField.requestFocus();
+        charactersTextField.setTextFormatter(new TextFormatter<>(change -> {
+            change.setText(change.getText().toUpperCase());
+            return change;
+        }));
+    }
+
     @FXML
     private void createGameButtonClicked() {
         // Check whether the Text Field is empty or not.
@@ -43,9 +57,11 @@ public class CreateWordController {
             } catch (NotValidQueryStringException e) {
                 infoLabel.setText("Lütfen girdiğiniz harfleri kontrol ediniz.");
                 charactersTextField.clear();
+                charactersTextField.requestFocus();
             } catch (NoSuchWordListException e) {
                 infoLabel.setText("Bu dizi ile bir oyun oluşturulamadı. Lütfen farklı harfler ile tekrar deneyiniz.");
                 charactersTextField.clear();
+                charactersTextField.requestFocus();
             }
         }
     }
