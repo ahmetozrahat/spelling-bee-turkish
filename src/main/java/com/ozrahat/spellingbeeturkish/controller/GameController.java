@@ -4,6 +4,7 @@ import com.ozrahat.spellingbeeturkish.Main;
 import com.ozrahat.spellingbeeturkish.helpers.Dictionary;
 import com.ozrahat.spellingbeeturkish.helpers.Helpers;
 import com.ozrahat.spellingbeeturkish.model.GameModel;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -71,6 +72,7 @@ public class GameController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Platform.runLater(() -> textField.requestFocus());
         textField.setTextFormatter(new TextFormatter<>(change -> {
             change.setText(change.getText().toUpperCase());
             return change;
