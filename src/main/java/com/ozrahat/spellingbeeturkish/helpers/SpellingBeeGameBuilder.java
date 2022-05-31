@@ -13,7 +13,6 @@ public class SpellingBeeGameBuilder {
 
     private ArrayList<Character> alphabet;
     private ArrayList<Character> characters;
-    private ArrayList<String> validWords;
 
     public SpellingBeeGameBuilder() {
         initializeDictionary();
@@ -60,9 +59,9 @@ public class SpellingBeeGameBuilder {
      */
     public GameModel buildGame(String query) throws Exception {
         initializeAlphabet();
-        ArrayList<String> wordList = new ArrayList<>();
+        ArrayList<String> wordList;
+        ArrayList<String> validWords = new ArrayList<>();
         characters = new ArrayList<>();
-        validWords = new ArrayList<>();
 
         if (isValidQuery(query)) {
             // Start the game.
@@ -108,7 +107,6 @@ public class SpellingBeeGameBuilder {
         for (String word: dictionary.getWordList()) {
             if (Helpers.isPangram(word, characters)) {
                 pangramWords.add(word);
-                System.out.println(word + " is a pangram!");
             }
         }
         return !pangramWords.isEmpty();
