@@ -15,10 +15,13 @@
       </ImageView>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Label fx:id="infoLabel" styleClass="home-desc" text="Lütfen oyun oluşturmak için, 7 harfli, harfleri birbirinden farklı, anlamlı ya da anlamsız bir kelime girin." textAlignment="CENTER" wrapText="true" />
+            <Label fx:id="infoLabel" styleClass="home-desc" text="Lütfen oyun oluşturmak için, 7 harfli, harfleri birbirinden farklı, anlamlı ya da anlamsız bir kelime girin." textAlignment="CENTER" wrapText="true">
+               <HBox.margin>
+                  <Insets left="32.0" right="32.0" />
+               </HBox.margin></Label>
          </children>
       </HBox>
-      <TextField fx:id="charactersTextField" alignment="CENTER" promptText="HARFLERİ GİRİN" styleClass="text-field" />
+      <TextField fx:id="charactersTextField" alignment="CENTER" onAction="#createGameButtonClicked" promptText="HARFLERİ GİRİN" styleClass="text-field" />
       <Button fx:id="createGameButton" mnemonicParsing="false" onAction="#createGameButtonClicked" styleClass="default-btn" text="Oyun Oluştur">
          <VBox.margin>
             <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
