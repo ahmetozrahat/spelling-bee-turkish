@@ -1,7 +1,9 @@
-package com.ozrahat.spellingbeeturkish.helpers;
+package com.ozrahat.spellingbeeturkish;
 
 import com.ozrahat.spellingbeeturkish.exceptions.NoSuchWordListException;
 import com.ozrahat.spellingbeeturkish.exceptions.NotValidQueryStringException;
+import com.ozrahat.spellingbeeturkish.helpers.Dictionary;
+import com.ozrahat.spellingbeeturkish.helpers.Helpers;
 import com.ozrahat.spellingbeeturkish.model.GameModel;
 
 import java.io.File;
@@ -9,7 +11,7 @@ import java.util.*;
 
 public class SpellingBeeGameBuilder {
 
-    private Dictionary dictionary;
+    private com.ozrahat.spellingbeeturkish.helpers.Dictionary dictionary;
 
     private ArrayList<String> pangramWords;
 

@@ -4,7 +4,7 @@ import com.ozrahat.spellingbeeturkish.Main;
 import com.ozrahat.spellingbeeturkish.exceptions.NoSuchWordListException;
 import com.ozrahat.spellingbeeturkish.exceptions.NotValidQueryStringException;
 import com.ozrahat.spellingbeeturkish.helpers.Helpers;
-import com.ozrahat.spellingbeeturkish.helpers.SpellingBeeGameBuilder;
+import com.ozrahat.spellingbeeturkish.SpellingBeeGameBuilder;
 import com.ozrahat.spellingbeeturkish.model.GameModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

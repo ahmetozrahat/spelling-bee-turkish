@@ -2,7 +2,7 @@ package com.ozrahat.spellingbeeturkish.controller;
 
 import com.ozrahat.spellingbeeturkish.Main;
 import com.ozrahat.spellingbeeturkish.helpers.Helpers;
-import com.ozrahat.spellingbeeturkish.helpers.SpellingBeeGameBuilder;
+import com.ozrahat.spellingbeeturkish.SpellingBeeGameBuilder;
 import com.ozrahat.spellingbeeturkish.model.GameModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
