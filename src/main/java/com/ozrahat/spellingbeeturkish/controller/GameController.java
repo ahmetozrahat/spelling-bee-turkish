@@ -5,13 +5,16 @@ import com.ozrahat.spellingbeeturkish.helpers.Dictionary;
 import com.ozrahat.spellingbeeturkish.helpers.Helpers;
 import com.ozrahat.spellingbeeturkish.model.GameModel;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.text.Font;
 
 import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-public class GameController {
+public class GameController implements Initializable {
 
     @FXML
     private TextField textField;
@@ -67,6 +70,14 @@ public class GameController {
         dictionary.printWords();
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        textField.setTextFormatter(new TextFormatter<>(change -> {
+            change.setText(change.getText().toUpperCase());
+            return change;
+        }));
+    }
+
     @FXML
     private void textFieldEntered() {
         if (!textField.getText().isEmpty() && !textField.getText().isBlank())
@@ -116,11 +127,13 @@ public class GameController {
             String newSequence = Helpers.removeLastCharacter(sequence);
             textField.setText(newSequence);
         }
+        textField.requestFocus();
     }
 
     @FXML
     private void shuffleButtonClicked() {
         gameModel.shuffleLetters();
+        textField.requestFocus();
     }
 
     @FXML
@@ -134,6 +147,7 @@ public class GameController {
                 gameModel.setScore(gameModel.getScore() + getPoints(word));
             }
         }
+        textField.requestFocus();
     }
 
     public void setModel(GameModel gameModel) {
