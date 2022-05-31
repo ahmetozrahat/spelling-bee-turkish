@@ -39,14 +39,14 @@ public class SpellingBeeGameBuilder {
 
         Character centerCharacter = Helpers.getWordCountByCenterCharacter(newCharacters, dictionary.getWordList());
 
-        List<String> wordList = Helpers.getWordListForGame(dictionary.getWordList(), newCharacters, centerCharacter);
+        TreeSet<String> wordList = Helpers.getWordListForGame(dictionary.getWordList(), newCharacters, centerCharacter);
 
         newCharacters.remove(centerCharacter);
 
         GameModel gameModel = new GameModel();
         gameModel.setCharacters(newCharacters);
         gameModel.setCenterLetter(centerCharacter);
-        gameModel.setWordList(new ArrayList<>(wordList));
+        gameModel.setWordList(new TreeSet<>(wordList));
 
         return gameModel;
     }
@@ -62,7 +62,7 @@ public class SpellingBeeGameBuilder {
      */
     public GameModel buildGame(String query) throws NotValidQueryStringException, NoSuchWordListException {
         initializeAlphabet();
-        ArrayList<String> wordList;
+        TreeSet<String> wordList;
         ArrayList<String> validWords = new ArrayList<>();
         characters = new ArrayList<>();
 

@@ -126,9 +126,9 @@ public class Helpers {
      * @param centerCharacter The character that must be existed in every word at least one.
      * @return Array of the word list to start the game
      */
-    public static ArrayList<String> getWordListForGame(ArrayList<String> words, Character centerCharacter) {
+    public static TreeSet<String> getWordListForGame(ArrayList<String> words, Character centerCharacter) {
         // Initialize an array to hold the words.
-        ArrayList<String> wordList = new ArrayList<>();
+        TreeSet<String> wordList = new TreeSet<>();
         // We need to get all the possible words which contains the center character.
         for (String word: words) {
             if (word.contains(String.valueOf(centerCharacter)))
@@ -145,9 +145,9 @@ public class Helpers {
      * @param characters The character list that must be existed in every word.
      * @return Array of the word list to start the game
      */
-    public static ArrayList<String> getWordListForGame(ArrayList<String> words, ArrayList<Character> characters, Character centerCharacter) {
+    public static TreeSet<String> getWordListForGame(ArrayList<String> words, ArrayList<Character> characters, Character centerCharacter) {
         // Initialize an array to hold the words.
-        ArrayList<String> wordList = new ArrayList<>();
+        TreeSet<String> wordList = new TreeSet<>();
         // We need to get all the possible words which contains the center character.
         for (String word: words) {
             if (isValidWord(word, characters) && word.contains(String.valueOf(centerCharacter)))

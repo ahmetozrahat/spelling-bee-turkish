@@ -10,7 +10,7 @@ public class GameModel {
     private ArrayList<Character> characters;
     private Character centerCharacter;
 
-    private ArrayList<String> wordList;
+    private TreeSet<String> wordList;
     private TreeSet<String> correctAnswers;
 
     private int score;
@@ -49,11 +49,11 @@ public class GameModel {
         this.centerCharacter = centerLetter;
     }
 
-    public ArrayList<String> getWordList() {
+    public TreeSet<String> getWordList() {
         return wordList;
     }
 
-    public void setWordList(ArrayList<String> wordList) {
+    public void setWordList(TreeSet<String> wordList) {
         this.wordList = wordList;
     }
 
