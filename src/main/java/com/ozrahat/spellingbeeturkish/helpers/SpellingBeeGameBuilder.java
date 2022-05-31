@@ -1,5 +1,7 @@
 package com.ozrahat.spellingbeeturkish.helpers;
 
+import com.ozrahat.spellingbeeturkish.exceptions.NoSuchWordListException;
+import com.ozrahat.spellingbeeturkish.exceptions.NotValidQueryStringException;
 import com.ozrahat.spellingbeeturkish.model.GameModel;
 
 import java.io.File;
@@ -55,9 +57,10 @@ public class SpellingBeeGameBuilder {
      *
      * @param query String with 7 distinct characters.
      * @return GameModel object to start the game.
-     * @throws Exception if a game can not be created with the given query string.
+     * @throws NotValidQueryStringException if query string is not properly formed.
+     * @throws NoSuchWordListException if a game can not be created with the given query string.
      */
-    public GameModel buildGame(String query) throws Exception {
+    public GameModel buildGame(String query) throws NotValidQueryStringException, NoSuchWordListException {
         initializeAlphabet();
         ArrayList<String> wordList;
         ArrayList<String> validWords = new ArrayList<>();
@@ -87,10 +90,10 @@ public class SpellingBeeGameBuilder {
                 gameModel.setWordList(wordList);
                 return gameModel;
             }else {
-                throw new Exception("Can't create a word list with the given letters.");
+                throw new NoSuchWordListException();
             }
         }else {
-            throw new Exception("Not a valid query string.");
+            throw new NotValidQueryStringException();
         }
     }
 

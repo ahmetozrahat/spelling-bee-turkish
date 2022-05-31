@@ -1,6 +1,8 @@
 package com.ozrahat.spellingbeeturkish.controller;
 
 import com.ozrahat.spellingbeeturkish.Main;
+import com.ozrahat.spellingbeeturkish.exceptions.NoSuchWordListException;
+import com.ozrahat.spellingbeeturkish.exceptions.NotValidQueryStringException;
 import com.ozrahat.spellingbeeturkish.helpers.Helpers;
 import com.ozrahat.spellingbeeturkish.helpers.SpellingBeeGameBuilder;
 import com.ozrahat.spellingbeeturkish.model.GameModel;
@@ -38,9 +40,14 @@ public class CreateWordController {
             try {
                 GameModel gameModel = spellingBeeGameBuilder.buildGame(query);
                 startGame(gameModel);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
+            } catch (NotValidQueryStringException e) {
                 e.printStackTrace();
+                infoLabel.setText("Lütfen girdiğiniz harfleri kontrol ediniz.");
+                charactersTextField.clear();
+            } catch (NoSuchWordListException e) {
+                e.printStackTrace();
+                infoLabel.setText("Bu dizi ile bir oyun oluşturulamadı. Lütfen farklı harfler ile tekrar deneyiniz.");
+                charactersTextField.clear();
             }
         }
     }
