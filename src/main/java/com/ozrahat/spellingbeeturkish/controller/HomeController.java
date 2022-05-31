@@ -17,7 +17,7 @@ public class HomeController {
     @FXML
     private Button manualGenerateButton;
 
-    private FXMLLoader fxmlLoader;
+    private final FXMLLoader fxmlLoader;
 
     public HomeController() {
         fxmlLoader = new FXMLLoader();
