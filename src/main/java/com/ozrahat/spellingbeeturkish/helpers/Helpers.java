@@ -49,6 +49,22 @@ public class Helpers {
     }
 
     /**
+     * Method for checking whether a word has 7 distinct characters.
+     *
+     * @param word Any given word.
+     * @return true or false
+     */
+    public static boolean canPangram(String word) {
+        if (word.length() < 7)
+            return false;
+        HashMap<Character, Integer> characters = new HashMap<>();
+        for (Character character: word.toCharArray()) {
+            characters.merge(character, 1, Integer::sum);
+        }
+        return characters.keySet().size() == 7;
+    }
+
+    /**
      * Method for finding whether a word is valid or not.
      * Rules are:
      * <ul>
@@ -117,6 +133,25 @@ public class Helpers {
         for (String word: words) {
             if (word.contains(String.valueOf(centerCharacter)))
                 wordList.add(word.toLowerCase());
+        }
+        return wordList;
+    }
+
+    /**
+     * Method for checking all the possible words that contains
+     * the given center character at least one.
+     *
+     * @param words Words made up with given characters.
+     * @param characters The character list that must be existed in every word.
+     * @return Array of the word list to start the game
+     */
+    public static ArrayList<String> getWordListForGame(ArrayList<String> words, ArrayList<Character> characters, Character centerCharacter) {
+        // Initialize an array to hold the words.
+        ArrayList<String> wordList = new ArrayList<>();
+        // We need to get all the possible words which contains the center character.
+        for (String word: words) {
+            if (isValidWord(word, characters) && word.contains(String.valueOf(centerCharacter)))
+                wordList.add(word);
         }
         return wordList;
     }
